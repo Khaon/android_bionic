@@ -13,8 +13,16 @@ namespace std {
 
 void* operator new(std::size_t);
 void* operator new[](std::size_t);
-void  operator delete(void*);
-void  operator delete[](void*);
+void  operator delete(void*)
+#if __cplusplus >= 201103L
+                             noexcept
+#endif
+;
+void  operator delete[](void*)
+#if __cplusplus >= 201103L
+                               noexcept
+#endif
+;
 void* operator new(std::size_t, const std::nothrow_t&);
 void* operator new[](std::size_t, const std::nothrow_t&);
 void  operator delete(void*, const std::nothrow_t&);

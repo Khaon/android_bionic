@@ -38,11 +38,19 @@ void* operator new[](std::size_t size) {
     return p;
 }
 
-void  operator delete(void* ptr) {
+void  operator delete(void* ptr)
+#if __cplusplus >= 201103L
+                                 noexcept
+#endif
+{
     free(ptr);
 }
 
-void  operator delete[](void* ptr) {
+void  operator delete[](void* ptr)
+#if __cplusplus >= 201103L
+                                   noexcept
+#endif
+{
     free(ptr);
 }
 
